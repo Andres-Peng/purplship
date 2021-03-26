@@ -77,7 +77,7 @@ def tracking_request(
         Version=VersionId(ServiceId="trck", Major=18, Intermediate=0, Minor=0),
         SelectionDetails=[
             TrackSelectionDetail(
-                CarrierCode="FDXE",  # Read doc for carrier code customization
+                CarrierCode=None, #"FDXE","FSXP"  Read doc for carrier code customization
                 OperatingCompany=None,
                 PackageIdentifier=TrackPackageIdentifier(
                     Type="TRACKING_NUMBER_OR_DOORTAG", Value=tracking_number
@@ -94,7 +94,7 @@ def tracking_request(
             for tracking_number in payload.tracking_numbers
         ],
         TransactionTimeOutValueInMilliseconds=None,
-        ProcessingOptions=None,
+        ProcessingOptions=None, # for detail: =["INCLUDE_DETAILED_SCANS"]
     )
     return Serializable(request, _request_serializer)
 
