@@ -29,7 +29,11 @@ def _extract_details(shipment_node: Element, settings: Settings) -> TrackingDeta
         for node in
         shipment_node.xpath(".//*[local-name() = $name]", name="Activity")
     ]
-    delivered = any(a.Status.Type == 'D' for a in activities)
+    delivered = False
+    for a in activities:
+        if a.Status is not None:
+            if a.Status.Type == 'D':
+                delivered = True
 
     return TrackingDetails(
         carrier_name=settings.carrier_name,
